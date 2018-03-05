@@ -1,6 +1,9 @@
 FROM openjdk:8-jre-alpine
+ARG artifactid
+ARG version
+ENV artifact ${artifactid}-${version}.jar
 WORKDIR /app
-COPY * /app/
+COPY target/${artifact} /app/
 EXPOSE 8080
 ENTRYPOINT ["sh", "-c"]
-CMD ["java -jar spring-petclinic-1.5.1.jar"]
+CMD ["java -jar ${artifact}"]
